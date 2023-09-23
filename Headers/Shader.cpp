@@ -26,6 +26,11 @@ void Shader::Bind()
 	GLCall(glUseProgram(program));
 }
 
+unsigned int Shader::GetProgram()
+{
+	return this->program;
+}
+
 unsigned int Shader::CreateProgram(const std::string& vertex_source, const std::string& fragment_source, const std::string& geometry_source)
 {
 	program = glCreateProgram();

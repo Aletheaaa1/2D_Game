@@ -16,10 +16,13 @@ private:
 	unsigned int program;
 
 public:
+	Shader() = default;
 	Shader(const std::string& vs_file, const std::string& fs_file, const std::string& gs_file = "");
 	Shader& operator=(const Shader&);
 
 	void Bind();
+
+	unsigned int GetProgram();
 
 	void SetUniform3v(const std::string& name, const glm::vec3 valuse);
 	void SetUniform3f(const std::string& name, const float* values);

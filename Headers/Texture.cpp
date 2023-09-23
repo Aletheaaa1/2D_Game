@@ -54,7 +54,7 @@ Texture::Texture(const char* image, bool gamma, bool flip) :gamma(gamma), flip(f
 
 	if (data)
 	{
-		GLCall(glTexImage2D(GL_TEXTURE_2D, 0, internal_format, width, height, 0, format, GL_UNSIGNED_BYTE, data));
+		GLCall(glTexImage2D(GL_TEXTURE_2D, 0, internal_format, width, height, 0, format, type, data));
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 		GLCall(glGenerateMipmap(GL_TEXTURE_2D));
@@ -123,12 +123,13 @@ Texture::Texture(std::vector<std::string> cubemaps, bool gamma, bool flip) : gam
 
 Texture::~Texture()
 {
-	GLCall(glDeleteTextures(1, &m_texture_buffer));
+	//std::cout << 1 << std::endl;
+	//GLCall(glDeleteTextures(1, &this->m_texture_buffer));
 }
 
 void Texture::Bind()
 {
-	GLCall(glBindTexture(GL_TEXTURE_2D, m_texture_buffer));
+	GLCall(glBindTexture(GL_TEXTURE_2D, this->m_texture_buffer));
 }
 
 void Texture::Unbind()
@@ -138,8 +139,8 @@ void Texture::Unbind()
 
 void Texture::Usetexture(unsigned int texture_slot)
 {
-	m_slot_id = texture_slot + GL_TEXTURE0;
-	GLCall(glActiveTexture(m_slot_id));
+	this->m_slot_id = texture_slot + GL_TEXTURE0;
+	GLCall(glActiveTexture(this->m_slot_id));
 }
 
 unsigned char* Texture::ReadImage(const char* image_file)
@@ -151,7 +152,7 @@ unsigned char* Texture::ReadImage(const char* image_file)
 
 unsigned int Texture::GetSlot()
 {
-	return m_slot_id;
+	return this->m_slot_id;
 }
 
 unsigned int Texture::GetTextureID()
