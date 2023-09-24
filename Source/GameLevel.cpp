@@ -6,6 +6,7 @@ GameLevel::GameLevel()
 
 void GameLevel::Load(const char* file, unsigned int level_width, unsigned int level_height)
 {
+	this->bricks.clear();
 	std::ifstream fstream(file);
 	std::string line;
 	unsigned int  brick_level;
@@ -70,7 +71,7 @@ void GameLevel::Init(std::vector<std::vector<unsigned int>> bricks_data, unsigne
 				glm::vec3 color = glm::vec3{ 0.8f, 0.8f, 0.7f };
 
 				GameObject obj = GameObject{ ResourceManager::GetTexture("block_solid"), position, size ,glm::vec2{0.0f, 0.0f}, color };
-				obj.is_solid = false;
+				obj.is_solid = true;
 				this->bricks.push_back(obj);
 			}
 			else if (bricks_data[y][x] > 1)
@@ -87,7 +88,9 @@ void GameLevel::Init(std::vector<std::vector<unsigned int>> bricks_data, unsigne
 
 				glm::vec2 position = glm::vec2{ unit_width * x, unit_width * y };
 				glm::vec2 size = glm::vec2{ unit_width, unit_height };
-				this->bricks.push_back(GameObject{ ResourceManager::GetTexture("block"), position, size, glm::vec2{0.0f, 0.0f}, color });
+				GameObject obj{ ResourceManager::GetTexture("block"), position, size, glm::vec2{0.0f, 0.0f}, color };
+				obj.is_solid = false;
+				this->bricks.push_back(obj);
 			}
 		}
 	}
