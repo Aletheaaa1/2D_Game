@@ -8,7 +8,7 @@
 class BallObject :public GameObject
 {
 public:
-	bool is_stack;
+	bool is_stick;
 	float radius;
 
 public:
