@@ -8,9 +8,10 @@
 #include "GameLevel.h"
 #include "GameObject.h"
 #include "BallObject.h"
+#include "ParticleGenerator.h"
 
 constexpr glm::vec2 PLAYER_SIZE{ 100.0f, 20.0f };
-constexpr glm::vec2 INITIAL_BALL_VELOCITY{ -100.0f, -350.0f };
+constexpr glm::vec2 INITIAL_BALL_VELOCITY{ -200.0f, -700.0f };
 constexpr float PLAYER_VELOCITY{ 500.0f };
 constexpr float BALL_VELOCITY{ 700.0f };
 constexpr float BALL_RADIUS{ 12.5f };
@@ -48,6 +49,7 @@ public:
 	std::unique_ptr<SpriteRenderer> renderer;
 	std::unique_ptr<GameObject> player;
 	std::unique_ptr<BallObject> ball;
+	std::unique_ptr<ParticleGenerator> particle;
 
 	unsigned int level;
 	std::vector<GameLevel> levels;

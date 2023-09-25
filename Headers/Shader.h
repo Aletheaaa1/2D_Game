@@ -24,6 +24,7 @@ public:
 
 	unsigned int GetProgram();
 
+	void SetUniform2v(const std::string& name, const glm::vec2 valuse);
 	void SetUniform3v(const std::string& name, const glm::vec3 valuse);
 	void SetUniform3f(const std::string& name, const float* values);
 	void SetUniform3f(const std::string& name, std::initializer_list<float> values);

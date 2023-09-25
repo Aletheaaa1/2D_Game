@@ -97,6 +97,13 @@ std::string Shader::ReadShaderFiles(const std::string& shader_file)
 	return ss.str();
 }
 
+void Shader::SetUniform2v(const std::string& name, const glm::vec2 values)
+{
+	int location = GetLocation(name);
+	float* value = const_cast<float*>(glm::value_ptr(values));
+	glUniform2f(location, value[0], value[1]);
+}
+
 void Shader::SetUniform4f(const std::string& name, const float* values)
 {
 	int location = GetLocation(name);

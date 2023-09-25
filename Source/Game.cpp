@@ -7,7 +7,9 @@ Game::Game(unsigned int screen_width, unsigned int screen_height) :state(GameSta
 void Game::Init()
 {
 	Shader shader = ResourceManager::LoadShader("./Shaders/sprite.vs", "./Shaders/sprite.fs", "", "sprite_shader");
+	Shader particle_shader = ResourceManager::LoadShader("./Shaders/particle.vs", "./Shaders/particle.fs", "", "particle_shader");
 
+	Texture particle_texture = ResourceManager::LoadTexture("./Textures/particle.png", true, true, "particle_texture");
 	Texture background_texture = ResourceManager::LoadTexture("./Textures/background.jpg", true, false, "background");
 	Texture block_texture = ResourceManager::LoadTexture("./Textures/block.png", true, false, "block");
 	Texture block_solid_texture = ResourceManager::LoadTexture("./Textures/block_solid.png", true, false, "block_solid");
@@ -19,21 +21,24 @@ void Game::Init()
 	shader.SetUniformMat4("projection", projection);
 	shader.SetUniform1i("image_texture", 0);
 
-	this->renderer = std::make_unique<SpriteRenderer>(shader);
-
 	//
 	//	Level
 	//
 	GameLevel level_1, Level_2, Level_3, Level_4;
 	level_1.Load("./Level/LevelOne.txt", this->screen_width, this->screen_height / 2.0);
-	//Level_2.Load("./Level/LevelTwo.txt", this->screen_width, this->screen_height / 2.0);
-	//Level_3.Load("./Level/LevelThree.txt", this->screen_width, this->screen_height / 2.0);
-	//Level_4.Load("./Level/LevelFour.txt", this->screen_width, this->screen_height / 2.0);
+	Level_2.Load("./Level/LevelTwo.txt", this->screen_width, this->screen_height / 2.0);
+	Level_3.Load("./Level/LevelThree.txt", this->screen_width, this->screen_height / 2.0);
+	Level_4.Load("./Level/LevelFour.txt", this->screen_width, this->screen_height / 2.0);
 	this->levels.push_back(level_1);
-	//this->levels.push_back(Level_2);
-	//this->levels.push_back(Level_3);
-	//this->levels.push_back(Level_4);
-	this->level = 0;
+	this->levels.push_back(Level_2);
+	this->levels.push_back(Level_3);
+	this->levels.push_back(Level_4);
+	this->level = 1;
+
+	//
+	//	Renderer
+	//
+	this->renderer = std::make_unique<SpriteRenderer>(shader);
 
 	//
 	//	Player
@@ -46,6 +51,14 @@ void Game::Init()
 	//
 	glm::vec2 ball_pos = player_pos + glm::vec2{ PLAYER_SIZE.x / 2.0 - BALL_RADIUS , -BALL_RADIUS * 2 };
 	this->ball = std::make_unique<BallObject>(ball_texture, ball_pos, BALL_SIZE, BALL_RADIUS, INITIAL_BALL_VELOCITY);
+
+	//
+	//	Particle
+	//
+	particle_shader.Bind();
+	particle_shader.SetUniformMat4("projection", projection);
+	particle_shader.SetUniform1i("image_texture", 0);
+	this->particle = std::make_unique<ParticleGenerator>(particle_texture, particle_shader, 500);
 }
 
 void Game::Render()
@@ -57,12 +70,15 @@ void Game::Render()
 	this->player->Draw(*renderer);
 
 	this->ball->Draw(*renderer);
+
+	this->particle->Draw();
 }
 
 void Game::Update(float dt)
 {
 	ball->Move(dt, this->screen_width);
 	this->DoCollision();
+	this->particle->Update(dt, *ball, 2, glm::vec2(this->ball->radius / 2.0f));
 
 	//	游戏结束后重置
 	if (ball->position.y + ball->radius * 2.0f > this->screen_height + 100.0f)
