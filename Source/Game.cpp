@@ -126,6 +126,11 @@ void Game::Update(float dt)
 	//	道具
 	UpdatePowerUps(dt);
 
+	if (this->ball->is_pre_stick && CheckCollision(*this->ball, *this->player).is_collision)
+	{
+		this->ball->is_stick = true;
+	}
+
 	//	游戏结束后重置
 	if (ball->position.y + ball->radius * 2.0f > this->screen_height + 100.0f)
 	{
@@ -140,6 +145,7 @@ void Game::ResetObject()
 	ball->position = glm::vec2(this->screen_width / 2.0f - ball->radius, this->screen_height - PLAYER_SIZE.y - 2 * ball->radius);
 	ball->velocity = INITIAL_BALL_VELOCITY;
 	ball->is_stick = true;
+	ball->is_pre_stick = false;
 	ball->is_pass_through = false;
 
 	player->position = glm::vec2(screen_width / 2.0f - PLAYER_SIZE.x / 2.0f, screen_height - PLAYER_SIZE.y);
@@ -148,6 +154,8 @@ void Game::ResetObject()
 
 	post_processor->is_chaos = false;
 	post_processor->is_confuse = false;
+
+	this->powerups.clear();
 }
 
 void Game::ResetLevel()
@@ -393,7 +401,7 @@ void Game::ActivatePowerUp(PowerUp powerup)
 	else if (powerup.type == "sticky")
 	{
 		std::cout << 1;
-		this->ball->is_stick = true;
+		this->ball->is_pre_stick = true;
 		this->player->color = glm::vec3(1.0f, 0.5f, 0.5f);
 	}
 	else if (powerup.type == "pass_through")
@@ -450,6 +458,7 @@ void Game::UpdatePowerUps(float dt)
 					if (!IsOtherPowerupActive(this->powerups, "sticky"))
 					{
 						this->ball->is_stick = false;
+						this->ball->is_pre_stick = false;
 						this->player->color = glm::vec3(1.0f);
 					}
 				}

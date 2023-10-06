@@ -4,7 +4,7 @@ BallObject::BallObject() :GameObject(), is_stick(true), is_pass_through(false), 
 {
 }
 
-BallObject::BallObject(Texture& texture, glm::vec2 position, glm::vec2 size, float radius, glm::vec2 velocity) :GameObject(texture, position, size, velocity), radius(radius), is_stick(true), is_pass_through(false)
+BallObject::BallObject(Texture& texture, glm::vec2 position, glm::vec2 size, float radius, glm::vec2 velocity) :GameObject(texture, position, size, velocity), radius(radius), is_stick(true), is_pass_through(false), is_pre_stick(false)
 {
 }
 
