@@ -9,6 +9,7 @@ class BallObject :public GameObject
 {
 public:
 	bool is_stick;
+	bool is_pass_through;
 	float radius;
 
 public:

@@ -7,6 +7,7 @@
 class GameObject
 {
 public:
+	glm::vec2 pre_position;
 	glm::vec2 position, size, velocity;
 	glm::vec3 color;
 	float rotation;

@@ -4,7 +4,7 @@
 #include <glm/glm.hpp>
 #include <vector>
 
-#include "GameObject.h"
+#include "BallObject.h"
 #include "../Headers/Shader.h"
 #include "../Headers/Texture.h"
 #include "../Headers/ResourceManager.h"
@@ -31,7 +31,7 @@ private:
 public:
 	ParticleGenerator(Texture& texture, Shader& shader, unsigned int amount);
 	void Draw();
-	void Update(float dt, GameObject& obj, unsigned int new_particles, glm::vec2 offset = glm::vec2{ 0.0f });
+	void Update(float dt, BallObject& obj, unsigned int new_particles, glm::vec2 offset = glm::vec2{ 0.0f });
 
 private:
 	//	初始化
@@ -41,5 +41,5 @@ private:
 	unsigned int FirstUnusedParticle();
 
 	//	复活粒子
-	void RespawnParticle(Particle& particle, GameObject& obj, glm::vec2 offset);
+	void RespawnParticle(Particle& particle, BallObject& obj, glm::vec2 offset);
 };

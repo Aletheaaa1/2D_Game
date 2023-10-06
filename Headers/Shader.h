@@ -34,6 +34,9 @@ public:
 	void SetUniformMat4(const std::string& name, const float* values);
 	void SetUniformMat4(const std::string& name, glm::mat4 values);
 
+	void SetUniformfs(const std::string& name, const unsigned int num, const float* values);
+	void SetUniformis(const std::string& name, const unsigned int num, const int* values);
+
 	void SetUniformMateria(const std::string& name, Material& material);
 	void SetUniformMateriaWithMaterial(const std::string& name, Material& material);
 

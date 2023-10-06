@@ -13,6 +13,6 @@ void main()
 		discard;
 	}
 	vec3 color = texture_color.rgb * spriteColor;
-	color = pow(color, vec3(1.0 / 2.0));
+//	color = pow(color, vec3(1.0 / 2.0));
 	FragColor = vec4(color, 1.0);
 }

@@ -57,6 +57,9 @@
     <ClCompile Include="Source\ParticleGenerator.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Source\PostProcessor.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Headers\Render.h">
@@ -98,14 +101,17 @@
     <ClInclude Include="Source\ParticleGenerator.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Source\PostProcessor.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PowerUp.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Level\LevelOne.txt" />
     <Text Include="Level\LevelFour.txt" />
     <Text Include="Level\LevelThree.txt" />
     <Text Include="Level\LevelTwo.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Source\ClassDiagram3.cd" />
   </ItemGroup>
 </Project>

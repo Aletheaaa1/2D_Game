@@ -129,6 +129,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\PostProcessor.cpp" />
     <ClCompile Include="Source\ParticleGenerator.cpp" />
     <ClCompile Include="Source\BallObject.cpp" />
     <ClCompile Include="Source\GameLevel.cpp" />
@@ -145,10 +146,12 @@
     <ClCompile Include="Source\Program.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\PostProcessor.h" />
     <ClInclude Include="Source\ParticleGenerator.h" />
     <ClInclude Include="Source\BallObject.h" />
     <ClInclude Include="Source\GameLevel.h" />
     <ClInclude Include="Source\GameObject.h" />
+    <ClInclude Include="Source\PowerUp.h" />
     <ClInclude Include="Source\SpriteRenderer.h" />
     <ClInclude Include="Source\Game.h" />
     <ClInclude Include="Headers\Material.h" />
@@ -164,9 +167,6 @@
     <Text Include="Level\LevelOne.txt" />
     <Text Include="Level\LevelThree.txt" />
     <Text Include="Level\LevelTwo.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Source\ClassDiagram3.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

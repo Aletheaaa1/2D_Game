@@ -8,5 +8,9 @@ out vec4 FragColor;
 
 void main()
 {
-	FragColor = texture(image_texture, TexCoords) * ParticleColor;
+	vec4 color = texture(image_texture, TexCoords) * ParticleColor;
+	color = color / (1.0 + color);
+//	color = pow(color, vec4(1.0 / 2.2));
+
+	FragColor = color;
 }

@@ -1,10 +1,10 @@
 #include "BallObject.h"
 
-BallObject::BallObject() :GameObject(), is_stick(true), radius(12.5f)
+BallObject::BallObject() :GameObject(), is_stick(true), is_pass_through(false), radius(12.5f)
 {
 }
 
-BallObject::BallObject(Texture& texture, glm::vec2 position, glm::vec2 size, float radius, glm::vec2 velocity) :GameObject(texture, position, size, velocity), radius(radius), is_stick(true)
+BallObject::BallObject(Texture& texture, glm::vec2 position, glm::vec2 size, float radius, glm::vec2 velocity) :GameObject(texture, position, size, velocity), radius(radius), is_stick(true), is_pass_through(false)
 {
 }
 
@@ -38,4 +38,6 @@ void BallObject::Reset(glm::vec2 position, glm::vec2 velocity)
 {
 	this->position = position;
 	this->velocity = velocity;
+	this->is_stick = false;
+	this->is_pass_through = false;
 }

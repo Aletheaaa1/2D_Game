@@ -66,7 +66,7 @@ void GameLevel::Init(std::vector<std::vector<unsigned int>> bricks_data, unsigne
 		{
 			if (bricks_data[y][x] == 1)
 			{
-				glm::vec2 position = glm::vec2{ unit_width * x, unit_width * y };
+				glm::vec2 position = glm::vec2{ unit_width * x, unit_height * y };
 				glm::vec2 size = glm::vec2{ unit_width, unit_height };
 				glm::vec3 color = glm::vec3{ 0.8f, 0.8f, 0.7f };
 
@@ -86,7 +86,7 @@ void GameLevel::Init(std::vector<std::vector<unsigned int>> bricks_data, unsigne
 				else if (bricks_data[y][x] == 5)
 					color = glm::vec3{ 1.0f, 0.5f, 0.0f };
 
-				glm::vec2 position = glm::vec2{ unit_width * x, unit_width * y };
+				glm::vec2 position = glm::vec2{ unit_width * x, unit_height * y };
 				glm::vec2 size = glm::vec2{ unit_width, unit_height };
 				GameObject obj{ ResourceManager::GetTexture("block"), position, size, glm::vec2{0.0f, 0.0f}, color };
 				obj.is_solid = false;

@@ -160,6 +160,18 @@ void Shader::SetUniformMat4(const std::string& name, glm::mat4 values)
 	GLCall(glUniformMatrix4fv(location, 1, false, glm::value_ptr(values)));
 }
 
+void Shader::SetUniformfs(const std::string& name, const unsigned int num, const float* values)
+{
+	int location = GetLocation(name);
+	GLCall(glUniform1fv(location, num, values));
+}
+
+void Shader::SetUniformis(const std::string& name, const unsigned int num, const int* values)
+{
+	int location = GetLocation(name);
+	GLCall(glUniform1iv(location, num, values));
+}
+
 void Shader::SetUniformMateria(const std::string& name, Material& material)
 {
 	std::string ambient = ".ambient";
